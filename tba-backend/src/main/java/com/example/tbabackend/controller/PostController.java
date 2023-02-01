@@ -37,7 +37,7 @@ public class PostController {
         p3.setHeader("hiiiii");
         p3.setContent("another content");
         p3.setDate(new Date());
-        posts.add(p2);
+        posts.add(p3);
 
 
         return posts;

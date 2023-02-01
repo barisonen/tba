@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { getPosts } from "../service/PostsService";
-import Card from 'react-bootstrap/Card';
+import { Card } from "react-bootstrap";
 import './Posts.css';
 
 interface Post {
@@ -31,10 +31,10 @@ const Posts = (): JSX.Element => {
   return (
     <>
       {
-        posts.map((post) => {
+        posts.map((post, i) => {
           return (
             <>
-              <Card className="text-center">
+              <Card className="card text-white bg-dark mb-3">
                 <Card.Header>{post.user}</Card.Header>
                 <Card.Body>
                   <Card.Title>{post.header}</Card.Title>
