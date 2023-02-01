@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { getPosts } from "../service/PostsService";
+import moment from "moment";
 import { Card } from "react-bootstrap";
 import './Posts.css';
 
@@ -34,7 +35,7 @@ const Posts: React.FC = (): JSX.Element => {
 
   const generateContentString = (content: string): string => {
     if (content.length > 30) {
-      return content.substring(0, 27) + "...";
+      return content; //.substring(0, 27) + "...";
       
     } else return content;
   }
@@ -45,7 +46,7 @@ const Posts: React.FC = (): JSX.Element => {
         posts.map((post, i) => {
           return (
             <>
-              <Card className="card text-white bg-dark mb-3" onClick={() => onPostSelect(i)} style={{ cursor: "pointer" }}>
+              <Card className="card text-white bg-dark mb-3" onClick={() => onPostSelect(i)} style={{ cursor: "pointer", width: "20%" }}>
                 <Card.Header>{post.user}</Card.Header>
                 <Card.Body>
                   <Card.Title>{post.header}</Card.Title>
@@ -53,7 +54,7 @@ const Posts: React.FC = (): JSX.Element => {
                     {generateContentString(post.content)}
                   </Card.Text>
                 </Card.Body>
-                <Card.Footer className="text-muted">{post.date.toLocaleString()}</Card.Footer>
+                <Card.Footer className="text-muted">{moment(post.date).format("DD-MMM-YYYY HH:mm:ss")}</Card.Footer>
               </Card>
               <div className="break"></div>
             </>
