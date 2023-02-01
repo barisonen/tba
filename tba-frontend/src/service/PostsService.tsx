@@ -10,7 +10,28 @@ const config: Params = {
   headers: {},
 }
 
-export const getRequests = async (data: any): Promise<any> => {
+export const getPosts = async (): Promise<any> => {
+  return await axios ({
+    method: "get",
+    url: `${config.baseUrl}/getPosts`
+  }).then((response) => {
+    console.log(response);
+    return {
+      status: response.status,
+      data: response.data
+    }
+  }).catch((error) => {
+    console.log(error);
+    return {
+      status: error.status,
+      data: error.response
+    }
+  })
+}
+
+/*
+
+export const getPosts = async (data: any): Promise<any> => {
   return await axios ({
     method: "get",
     url: `${config.baseUrl}/getPosts`,
@@ -29,3 +50,5 @@ export const getRequests = async (data: any): Promise<any> => {
     }
   })
 }
+
+*/

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { getPosts } from "../service/PostsService";
 import Card from 'react-bootstrap/Card';
 import './Posts.css';
 
@@ -15,13 +16,16 @@ const Posts = (): JSX.Element => {
   const [posts, setPosts] = useState<Post[]>([]);
   
   useEffect(() => {
-        // get data from backend
 
-        const newPosts: Post[] = [];
-        newPosts.push({ user: "Baris", header: "Hi!", content: "This is my first post", date: new Date() });
-        newPosts.push({ user: "Baris", header: "Sup", content: "I'm old now, sup newbies", date: new Date() });
-    
-        setPosts([ ...posts, ...newPosts ]);
+        getPosts().then(
+          (res) => {
+            if (res.status === 200) {
+              setPosts(res.data);
+            } else {
+              console.log(res);
+            }
+          }
+        );
   }, [])
 
   return (
