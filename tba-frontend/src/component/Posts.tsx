@@ -11,7 +11,7 @@ interface Post {
   date: Date
 }
 
-const Posts = (): JSX.Element => {
+const Posts: React.FC = (): JSX.Element => {
 
   const [posts, setPosts] = useState<Post[]>([]);
   
@@ -28,17 +28,30 @@ const Posts = (): JSX.Element => {
         );
   }, [])
 
+  const onPostSelect = (i: number): void => {
+    console.log(`selected post: ${posts[i].content}`);;
+  }
+
+  const generateContentString = (content: string): string => {
+    if (content.length > 30) {
+      return content.substring(0, 27) + "...";
+      
+    } else return content;
+  }
+
   return (
     <>
       {
         posts.map((post, i) => {
           return (
             <>
-              <Card className="card text-white bg-dark mb-3">
+              <Card className="card text-white bg-dark mb-3" onClick={() => onPostSelect(i)} style={{ cursor: "pointer" }}>
                 <Card.Header>{post.user}</Card.Header>
                 <Card.Body>
                   <Card.Title>{post.header}</Card.Title>
-                  <Card.Text>{post.content}</Card.Text>
+                  <Card.Text>
+                    {generateContentString(post.content)}
+                  </Card.Text>
                 </Card.Body>
                 <Card.Footer className="text-muted">{post.date.toLocaleString()}</Card.Footer>
               </Card>

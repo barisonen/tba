@@ -39,6 +39,13 @@ public class PostController {
         p3.setDate(new Date());
         posts.add(p3);
 
+        PostDto p4 = new PostDto();
+        p4.setUser("baris 3");
+        p4.setHeader("hiiiii");
+        p4.setContent("thiswillbealongtextthatislongerthan30characters");
+        p4.setDate(new Date());
+        posts.add(p4);
+
 
         return posts;
     }
