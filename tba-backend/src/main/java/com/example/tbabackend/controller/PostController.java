@@ -20,8 +20,8 @@ public class PostController {
         List<PostDto> posts = new ArrayList<>();
         PostDto p1 = new PostDto();
         p1.setUser("baris");
-        p1.setHeader("hello");
-        p1.setContent("content 1");
+        p1.setHeader("Welcome to the post");
+        p1.setContent("This is a post about bla bla blabla");
         p1.setDate(new Date());
         posts.add(p1);
 
@@ -42,7 +42,7 @@ public class PostController {
         PostDto p4 = new PostDto();
         p4.setUser("baris 3");
         p4.setHeader("hiiiii");
-        p4.setContent("thiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongert");
+        p4.setContent("thiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongert");
         p4.setDate(new Date());
         posts.add(p4);
 

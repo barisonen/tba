@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.Fragment>
-    <App />
+    <App/>
   </React.Fragment>
 );
