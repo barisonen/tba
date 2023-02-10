@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { getPosts } from "../service/PostsService";
 import moment from "moment";
@@ -47,14 +47,16 @@ const Posts = (): JSX.Element => {
             <>
               <div className="grid mb-8 mt-8 ml-[30%] mr-[30%] rounded-lg shadow-sm md:mb-12 cursor-pointer"
                 onClick={() => onPostSelect(i)}>
-                <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800">
+                <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800 text-gray-300 
+                hover:bg-gray-700
+                hover:text-white">
                   <blockquote className="flex flex-col text-white lg:mb-8 dark:text-gray-400">
                     <h3 className="text-lg font-semibold text-white dark:text-white">{post.header}</h3>
                     <p className="my-4 font-light break-all">{generateContentString(post.content)}</p>
                   </blockquote>
                   <figcaption className="flex justify-between">
                     <div className="flex space-x-5">
-                      <img className="rounded-full w-6 h-6" src="/images/osman.png" alt="profile picture" />
+                      <img className="rounded-full w-6 h-6" src="/images/osman.png" alt="pp" />
                       <div className="font-medium dark:text-white">
                         <div className="text-white">{post.user}</div>
                         <div className="text-xs font-light text-gray-400 dark:text-gray-400">user description</div>
