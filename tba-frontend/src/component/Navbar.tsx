@@ -23,6 +23,7 @@ const Navbar = (): JSX.Element => {
               <div className="flex space-x-4">
                 <Link to='/' className={linkClassName}>Homepage</Link>
                 <Link to='/posts' className={linkClassName}>Posts</Link>
+                <Link to='/about' className={linkClassName}>About</Link>
               </div>
             </div>
           </div>

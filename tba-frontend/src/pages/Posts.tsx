@@ -45,7 +45,7 @@ const Posts = (): JSX.Element => {
         posts.map((post, i) => {
           return (
             <>
-              <div className="grid mb-8 mt-8 ml-[30%] mr-[30%] rounded-lg shadow-sm md:mb-12 cursor-pointer"
+              <div className="grid mb-8 mt-4 sm:mt-8 ml-[10%] mr-[10%] sm:ml-[30%] sm:mr-[30%] rounded-lg shadow-sm md:mb-12 cursor-pointer"
                 onClick={() => onPostSelect(i)}>
                 <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800 text-gray-300 
                 hover:bg-gray-700
@@ -54,15 +54,15 @@ const Posts = (): JSX.Element => {
                     <h3 className="text-lg font-semibold text-white dark:text-white">{post.header}</h3>
                     <p className="my-4 font-light break-all">{generateContentString(post.content)}</p>
                   </blockquote>
-                  <figcaption className="flex justify-between">
-                    <div className="flex space-x-5">
-                      <img className="rounded-full w-6 h-6" src="/images/osman.png" alt="pp" />
+                  <figcaption className="flex items-center sm:justify-between">
+                    <div className="flex space-x-1 sm:space-x-5">
+                      <img className="rounded-full w-12 h-14" src="/images/osman.png" alt="pp" />
                       <div className="font-medium dark:text-white">
                         <div className="text-white">{post.user}</div>
                         <div className="text-xs font-light text-gray-400 dark:text-gray-400">user description</div>
                       </div>
                     </div>
-                    <div className="text-xs font-light text-gray-400 dark:text-gray-400">
+                    <div className="text-xs xs:text-md text-right font-light text-gray-400 dark:text-gray-400">
                       {moment(post.date).format("DD-MMM-YYYY HH:mm:ss")}
                     </div>
                   </figcaption>
