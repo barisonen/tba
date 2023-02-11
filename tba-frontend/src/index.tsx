@@ -6,6 +6,7 @@ import Homepage from './pages/Homepage';
 import Posts from './pages/Posts';
 import Navbar from './component/Navbar';
 import About from './pages/About';
+import Create from './pages/Create';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +18,7 @@ root.render(
       <Route path='/' element={<Homepage />}></Route>
       <Route path='/posts' element={<Posts />}></Route>
       <Route path='/about' element={<About />}></Route>
+      <Route path='/create' element={<Create />}></Route>
     </Routes>
   </BrowserRouter>
 );

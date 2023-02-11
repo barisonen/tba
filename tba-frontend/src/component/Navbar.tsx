@@ -5,7 +5,7 @@ const Navbar = (): JSX.Element => {
   const linkClassName = `text-gray-300 
     hover:bg-gray-700
     hover:text-white
-    px-3 py-2
+    px-3 py-3
     rounded-md
     text-sm
     font-medium`;
@@ -20,10 +20,11 @@ const Navbar = (): JSX.Element => {
             <div className="flex flex-shrink-0 items-center">
             </div>
             <div className="sm:ml-6 sm:block">
-              <div className="flex space-x-4">
+              <div className="flex space-x-1 sm:space-x-4">
                 <Link to='/' className={linkClassName}>Homepage</Link>
                 <Link to='/posts' className={linkClassName}>Posts</Link>
                 <Link to='/about' className={linkClassName}>About</Link>
+                <Link to='/create' className={linkClassName}>Create</Link>
               </div>
             </div>
           </div>
