@@ -1,59 +1,31 @@
 package com.example.tbabackend.controller;
 
 import com.example.tbabackend.dto.PostDto;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.Date;
+import com.example.tbabackend.entity.Post;
+import com.example.tbabackend.service.PostService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/posts")
+@RequiredArgsConstructor
 public class PostController {
 
-    @GetMapping("/getPosts")
-    public List<PostDto> getPosts() {
-        List<PostDto> posts = new ArrayList<>();
-        PostDto p1 = new PostDto();
-        p1.setUser("baris");
-        p1.setHeader("Welcome to the post");
-        p1.setContent("This is a post about bla bla blabla");
-        p1.setDate(new Date());
-        posts.add(p1);
+    private final PostService postService;
 
-        PostDto p2 = new PostDto();
-        p2.setUser("baris 2");
-        p2.setHeader("hi");
-        p2.setContent("other content");
-        p2.setDate(new Date());
-        posts.add(p2);
+    @GetMapping("/get-posts")
+    public ResponseEntity<List<PostDto>> getPosts() {
+        List<PostDto> postList = postService.getPosts();
+        return ResponseEntity.ok(postList);
+    }
 
-        PostDto p3 = new PostDto();
-        p3.setUser("baris 3");
-        p3.setHeader("hiiiii");
-        p3.setContent("another content");
-        p3.setDate(new Date());
-        posts.add(p3);
-
-        PostDto p4 = new PostDto();
-        p4.setUser("baris 3");
-        p4.setHeader("hiiiii");
-        p4.setContent("thiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongertthiswillbealongtextthatislongerthan30charactersokokokokokokokothiswillbealongtextthatislongert");
-        p4.setDate(new Date());
-        posts.add(p4);
-
-        PostDto p5 = new PostDto();
-        p5.setUser("hakan");
-        p5.setHeader("merhaba");
-        p5.setContent("slm");
-        p5.setDate(new Date());
-        posts.add(p5);
-
-
-        return posts;
+    @PostMapping("/create-post")
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
+        PostDto savedPost = postService.createPost(postDto);
+        return ResponseEntity.ok(savedPost);
     }
 }

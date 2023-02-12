@@ -10,5 +10,6 @@ public class PostDto {
     private String user;
     private String header;
     private String content;
-    private Date date;
+    private Date dateCreated;
+    private Date lastUpdated;
 }
