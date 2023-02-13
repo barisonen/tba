@@ -1,10 +1,8 @@
 package com.example.tbabackend.controller;
 
 import com.example.tbabackend.dto.PostDto;
-import com.example.tbabackend.entity.Post;
 import com.example.tbabackend.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

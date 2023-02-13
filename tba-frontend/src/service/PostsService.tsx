@@ -1,5 +1,6 @@
 import axios from "axios";
 import AxiosConfigModel from "../interface/AxiosConfigModel";
+import PostModel from "../interface/PostModel";
 
 const config: AxiosConfigModel = {
   baseUrl: "http://localhost:8080/posts",
@@ -7,7 +8,7 @@ const config: AxiosConfigModel = {
 }
 
 export const getPosts = async (): Promise<any> => {
-  return await axios.get(`${config.baseUrl}/getPosts`)
+  return await axios.get(`${config.baseUrl}/get-posts`)
   .then((response) => {
     console.log(response);
     return {
@@ -23,14 +24,11 @@ export const getPosts = async (): Promise<any> => {
   })
 }
 
-/*
-
-export const getPosts = async (data: any): Promise<any> => {
-  return await axios ({
-    method: "get",
-    url: `${config.baseUrl}/getPosts`,
-    data
-  }).then((response) => {
+export const createPost = async (post: PostModel): Promise<any> => {
+  console.log(post);
+  
+  return await axios.post(`${config.baseUrl}/create-post`, post)
+  .then((response) => {
     console.log(response);
     return {
       status: response.status,
@@ -44,5 +42,3 @@ export const getPosts = async (data: any): Promise<any> => {
     }
   })
 }
-
-*/
