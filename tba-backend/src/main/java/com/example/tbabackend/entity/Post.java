@@ -28,8 +28,11 @@ public class Post {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(name = "date_created")
-    @CreationTimestamp()
+    @CreationTimestamp
     private Date dateCreated;
 
     @Column(name = "last_updated")
