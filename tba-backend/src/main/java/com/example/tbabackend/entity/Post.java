@@ -22,9 +22,6 @@ public class Post {
     @Column(name = "user")
     private String user;
 
-    @Column(name = "header")
-    private String header;
-
     @Column(name = "content")
     private String content;
 

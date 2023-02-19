@@ -1,6 +1,6 @@
 import axios from "axios";
 import AxiosConfigModel from "../interface/AxiosConfigModel";
-import PostModel from "../interface/PostModel";
+import CreatePostModel from "../interface/CreatePostModel";
 
 const config: AxiosConfigModel = {
   baseUrl: "http://localhost:8080/posts",
@@ -24,7 +24,7 @@ export const getPosts = async (): Promise<any> => {
   })
 }
 
-export const createPost = async (post: PostModel): Promise<any> => {
+export const createPost = async (post: CreatePostModel): Promise<any> => {
   console.log(post);
   
   return await axios.post(`${config.baseUrl}/create-post`, post)

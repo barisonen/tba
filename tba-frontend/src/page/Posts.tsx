@@ -5,7 +5,6 @@ import moment from "moment";
 
 interface Post {
   user: string;
-  header: string;
   content: string;
   imageUrl: string;
   date: Date
@@ -32,13 +31,13 @@ const Posts = (): JSX.Element => {
   });
 
   const onPostSelect = (i: number): void => {
-    console.log(`selected post: ${posts[i].content}`);;
+    console.log(`selected post: ${posts[i].content}`);
     console.log(posts[i].imageUrl);
   }
 
   const generateContentString = (content: string): string => {
     if (content.length > 30) {
-      return content; //content.substring(0, 27) + "...";
+      return content;
 
     } else return content;
   }
@@ -58,7 +57,6 @@ const Posts = (): JSX.Element => {
                 hover:text-white">
                     <img className="rounded mb-4 rounded-lg" src={post.imageUrl} alt="pp" />
                     <blockquote className="flex flex-col text-white lg:mb-8 dark:text-gray-400">
-                      <h3 className="text-lg font-semibold text-white dark:text-white">{post.header}</h3>
                       <p className="my-4 font-light break-all">{generateContentString(post.content)}</p>
                     </blockquote>
                     <figcaption className="flex items-center sm:justify-between">
