@@ -22,11 +22,11 @@ public class Post {
     @Column(name = "user")
     private String user;
 
-    @Column(name = "content")
-    private String content;
+    @Column(name = "image_id")
+    private String imageId;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "content", length = 1000)
+    private String content;
 
     @Column(name = "date_created")
     @CreationTimestamp

@@ -1,11 +1,13 @@
-import React, {useEffect} from "react";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {createPost} from "../service/PostsService";
 import CreatePostModel from "../interface/CreatePostModel";
+import {storage} from '../config/firebase';
+import {ref, uploadBytes} from 'firebase/storage';
+import {v4} from 'uuid';
 
 const CreatePost = (): JSX.Element => {
 
-    const [post, setPost] = useState<CreatePostModel>({imageUrl: '', content: ''});
+    const [post, setPost] = useState<CreatePostModel>({imageId: '', content: ''});
     const [image, setImage] = useState();
     const [preview, setPreview] = useState<string>();
 
@@ -31,23 +33,29 @@ const CreatePost = (): JSX.Element => {
     }
 
     const handleContentChange = (event: any) => {
-        const content: string = event.target.value;
-        post.content = content;
+        post.content = event.target.value;
         setPost(post);
     }
 
     const createThePost = () => {
-        console.log(post);
-        createPost(post).then(
-            (res) => {
-                if (res.status === 200) {
-                    console.log("success!");
+        if (image == null) return;
 
-                } else {
-                    console.log(res);
+        const imageId = v4();
+        const imageRef = ref(storage, `images/${imageId}`);
+        uploadBytes(imageRef, image).then(() => {
+            // create post after successful image upload
+            post.imageId = imageId;
+            createPost(post).then(
+                (res) => {
+                    if (res.status === 200) {
+                        console.log("success!");
+
+                    } else {
+                        console.log(res);
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 
     return (
@@ -59,9 +67,12 @@ const CreatePost = (): JSX.Element => {
                 <div className="mb-8 mt-4 sm:mt-0 rounded-lg shadow-sm md:mb-12">
                     <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800 text-gray-300">
                         <div className="flex flex-col items-center">
-                            <label htmlFor="image" className="rounded-lg text-gray-300 mb-4 hover:bg-teal-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium bg-teal-900">Upload image</label>
-                            <input id="image" className="hidden rounded mb-4 rounded-lg" type='file' onChange={handleImageChange} accept="image/*"/>
-                            {image &&  <img className="mb-4" src={preview} /> }
+                            <label htmlFor="image"
+                                   className="rounded-lg text-gray-300 mb-4 hover:bg-teal-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium bg-teal-900">Upload
+                                image</label>
+                            <input id="image" className="hidden rounded mb-4 rounded-lg" type='file'
+                                   onChange={handleImageChange} accept="image/*"/>
+                            {image && <img className="mb-4" src={preview}/>}
                         </div>
                         <blockquote className="flex flex-col items-center text-white lg:mb-8 dark:text-gray-400">
                             <textarea id="message" rows={4}
@@ -72,7 +83,7 @@ const CreatePost = (): JSX.Element => {
                         </blockquote>
                         <button
                             className="mt-4 rounded-lg text-gray-300 hover:bg-teal-700 hover:text-white px-3 py-3 rounded-md text-sm font-medium bg-teal-900"
-                        onClick={createThePost}>Post
+                            onClick={createThePost}>Post
                         </button>
                     </figure>
                 </div>

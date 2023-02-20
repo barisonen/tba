@@ -1,5 +1,6 @@
 package com.example.tbabackend.controller;
 
+import com.example.tbabackend.controllerparam.CreatePostRequest;
 import com.example.tbabackend.dto.PostDto;
 import com.example.tbabackend.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class PostController {
     }
 
     @PostMapping("/create-post")
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
-        PostDto savedPost = postService.createPost(postDto);
+    public ResponseEntity<PostDto> createPost(@RequestBody CreatePostRequest request) {
+        PostDto savedPost = postService.createPost(request.getImageId(), request.getContent());
         return ResponseEntity.ok(savedPost);
     }
 }

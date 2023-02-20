@@ -23,9 +23,14 @@ public class PostService {
         return postMapper.postListToPostDtoList(posts);
     }
 
-    public PostDto createPost(PostDto postDto) {
-        Post post = postMapper.postDtoToPost(postDto);
-        Post savedPost = postRepository.save(post);
+    public PostDto createPost(String imageId, String content) {
+        Post newPost = Post.builder()
+                .user("baris")
+                .imageId(imageId)
+                .content(content)
+                .build();
+
+        Post savedPost = postRepository.save(newPost);
         return postMapper.postToPostDto(savedPost);
     }
 }

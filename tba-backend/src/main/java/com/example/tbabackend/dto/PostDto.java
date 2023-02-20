@@ -9,7 +9,7 @@ public class PostDto {
 
     private String user;
     private String content;
-    private String imageUrl;
+    private String imageId;
     private Date dateCreated;
     private Date lastUpdated;
 }

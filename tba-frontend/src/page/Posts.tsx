@@ -2,20 +2,25 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getPosts } from "../service/PostsService";
 import moment from "moment";
+import {getDownloadURL, ref} from "firebase/storage";
+import {storage} from "../config/firebase";
+
+// TODO: image'lar karisiyor. 63'teki log sonsuz donguye giriyor, pp bozuldu
 
 interface Post {
   user: string;
   content: string;
-  imageUrl: string;
+  imageId: string;
   date: Date
 }
 
 const Posts = (): JSX.Element => {
 
   const [posts, setPosts] = useState<Post[]>([]);
+  const [urls, setUrls] = useState<string[]>([]);
+  const [renderPermission, setRenderPermission] = useState<boolean[]>([]);
 
   useEffect(() => {
-
     getPosts().then(
       (res) => {
         if (res.status === 200) {
@@ -32,7 +37,6 @@ const Posts = (): JSX.Element => {
 
   const onPostSelect = (i: number): void => {
     console.log(`selected post: ${posts[i].content}`);
-    console.log(posts[i].imageUrl);
   }
 
   const generateContentString = (content: string): string => {
@@ -42,12 +46,21 @@ const Posts = (): JSX.Element => {
     } else return content;
   }
 
+  const getImage = (imageId: string) => {
+    getDownloadURL(ref(storage, `images/${imageId}`)).then((url) => {
+      setUrls([...urls, url]);
+      setRenderPermission([...renderPermission, true]);
+    });
+  }
+
   return (
     <div className="flex justify-center">
       <div className="flex flex-col items-stretch w-[80%] min-w-[80%] max-w-[80%]sm:w-[40%] sm:min-w-[40%] sm:max-w-[40%]">
         <h1 className="font-medium leading-tight text-5xl mt-8 mb-2 sm:mb-4 text-white text-center">Posts</h1>
         {
           posts.map((post, i) => {
+            console.log(i)
+            getImage(post.imageId);
             return (
               <>
                 <div className="mb-8 mt-4 sm:mt-0 rounded-lg shadow-sm md:mb-12 cursor-pointer"
@@ -55,7 +68,12 @@ const Posts = (): JSX.Element => {
                   <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800 text-gray-300 
                 hover:bg-gray-700
                 hover:text-white">
-                    <img className="rounded mb-4 rounded-lg" src={post.imageUrl} alt="pp" />
+                    {renderPermission[i] ?
+                        <img className="rounded mb-4 rounded-lg" src={urls[i]} alt="pp" />
+                    :
+                        <></>
+                    }
+
                     <blockquote className="flex flex-col text-white lg:mb-8 dark:text-gray-400">
                       <p className="my-4 font-light break-all">{generateContentString(post.content)}</p>
                     </blockquote>
