@@ -2,12 +2,12 @@ import React, {useEffect, useState} from "react";
 import {createPost} from "../service/PostsService";
 import CreatePostModel from "../interface/CreatePostModel";
 import {storage} from '../config/firebase';
-import {ref, uploadBytes} from 'firebase/storage';
+import {getDownloadURL, ref, uploadBytes} from 'firebase/storage';
 import {v4} from 'uuid';
 
 const CreatePost = (): JSX.Element => {
 
-    const [post, setPost] = useState<CreatePostModel>({imageId: '', content: ''});
+    const [post, setPost] = useState<CreatePostModel>({imageUrl: '', content: ''});
     const [image, setImage] = useState();
     const [preview, setPreview] = useState<string>();
 
@@ -20,7 +20,6 @@ const CreatePost = (): JSX.Element => {
         const objectUrl = URL.createObjectURL(image);
         setPreview(objectUrl);
 
-        // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl);
     }, [image]);
 
@@ -42,19 +41,21 @@ const CreatePost = (): JSX.Element => {
 
         const imageId = v4();
         const imageRef = ref(storage, `images/${imageId}`);
-        uploadBytes(imageRef, image).then(() => {
+        uploadBytes(imageRef, image).then((snapshot) => {
             // create post after successful image upload
-            post.imageId = imageId;
-            createPost(post).then(
-                (res) => {
-                    if (res.status === 200) {
-                        console.log("success!");
+            getDownloadURL(snapshot.ref).then((url) => {
+                post.imageUrl = url;
+                createPost(post).then(
+                    (res) => {
+                        if (res.status === 200) {
+                            console.log("success!");
 
-                    } else {
-                        console.log(res);
+                        } else {
+                            console.log(res);
+                        }
                     }
-                }
-            );
+                );
+            })
         });
     }
 

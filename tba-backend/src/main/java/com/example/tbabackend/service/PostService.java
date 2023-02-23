@@ -26,7 +26,7 @@ public class PostService {
     public PostDto createPost(String imageId, String content) {
         Post newPost = Post.builder()
                 .user("baris")
-                .imageId(imageId)
+                .imageUrl(imageId)
                 .content(content)
                 .build();
 

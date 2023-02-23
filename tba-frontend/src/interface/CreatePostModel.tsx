@@ -1,4 +1,4 @@
 export default interface CreatePostModel {
-  imageId: string;
+  imageUrl: string;
   content: string;
 }

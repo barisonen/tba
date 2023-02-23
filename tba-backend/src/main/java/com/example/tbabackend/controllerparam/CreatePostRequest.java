@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CreatePostRequest {
-    private String imageId;
+    private String imageUrl;
     private String content;
 }

@@ -24,7 +24,7 @@ public class PostController {
 
     @PostMapping("/create-post")
     public ResponseEntity<PostDto> createPost(@RequestBody CreatePostRequest request) {
-        PostDto savedPost = postService.createPost(request.getImageId(), request.getContent());
+        PostDto savedPost = postService.createPost(request.getImageUrl(), request.getContent());
         return ResponseEntity.ok(savedPost);
     }
 }
