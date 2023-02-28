@@ -14,10 +14,10 @@ const Posts = (): JSX.Element => {
     getPosts().then((response) => {
       if (response.status === 200) {
         let posts: PostModel[] = response.data;
-        posts = posts.sort((a, b) => new Date(a.lastUpdated).getMilliseconds() - new Date(b.lastUpdated).getMilliseconds());
+        console.log(posts);
+        posts = posts.sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
         console.log(posts)
         setPosts(posts);
-        console.log(response)
       }
     });
   }, [])
@@ -44,12 +44,12 @@ const Posts = (): JSX.Element => {
               <>
                 <div className="mb-8 mt-4 sm:mt-0 rounded-lg shadow-sm md:mb-12 cursor-pointer"
                      onClick={() => onPostSelect(i)}>
-                  <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800 text-gray-300
+                  <figure className="flex flex-col p-8 rounded-t-lg rounded-b-lg bg-slate-800
                 hover:bg-gray-700
                 hover:text-white">
-                    <img className="rounded mb-4 rounded-lg" src={post.imageUrl} alt="pp"/>
-                    <blockquote className="flex flex-col text-white lg:mb-8 dark:text-gray-400">
-                      <p className="my-4 font-light break-all">{generateContentString(post.content)}</p>
+                    <img className="rounded mb-4" src={post.imageUrl} alt="pp"/>
+                    <blockquote className="flex flex-col lg:mb-8">
+                      <p className="my-4 font-light break-all text-white">{generateContentString(post.content)}</p>
                     </blockquote>
                     <figcaption className="flex items-center sm:justify-between">
                       <div className="flex space-x-1 sm:space-x-5">
